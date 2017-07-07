@@ -9,5 +9,5 @@ package com.game.battlefield;
  */
 public interface Player {
 
-	void perform();
+	boolean perform();
 }
