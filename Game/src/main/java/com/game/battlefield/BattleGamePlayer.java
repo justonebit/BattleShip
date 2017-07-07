@@ -215,12 +215,12 @@ public class BattleGamePlayer implements Player {
 	 */
 	@Override
 	public String toString() {
-		return "BattleGamePlayer [LOC_OFFSET=" + LOC_OFFSET + ", ROW_OFFSET="
-				+ ROW_OFFSET + ", playerNum=" + playerNum + ", missiles="
-				+ missiles + ", battleStrength=" + battleStrength
-				+ ", battleField=" + Arrays.toString(battleField)
-				+ ", targets=" + Arrays.toString(targets) + ", enemyPlayer="
-				+ enemyPlayer + "]";
+		StringBuffer str = new StringBuffer();
+		str.append("Player [playerNum=" + playerNum + ", missiles=" + missiles
+				+ ", targets=" + Arrays.deepToString(targets) + ", battleField=\n") ;
+		for(int[] field: battleField) 
+			str.append(Arrays.toString(field) +"\n");
+		return str.toString();
 	}
 
 }
