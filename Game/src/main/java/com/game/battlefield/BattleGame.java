@@ -35,11 +35,7 @@ public class BattleGame implements Game<String[][]> {
 			
 			validate(INPUT);
 
-			players = new BattleGamePlayer[] {
-					new BattleGamePlayer(1, BATTLEGROUNG_ROW_NUM, BATTLEGROUNG_COL_NUM),
-					new BattleGamePlayer(2, BATTLEGROUNG_ROW_NUM, BATTLEGROUNG_COL_NUM) };
-
-			setUpPlayer(players);
+			players = setUpPlayer();
 
 		} catch (Exception exp) {
 			System.out.println(exp.getMessage());
@@ -48,6 +44,11 @@ public class BattleGame implements Game<String[][]> {
 		return players;
 	}
 
+	/**
+	 * @param input
+	 * @throws Exception
+	 * Comment : Validate the provided input.
+	 */
 	@Override
 	public boolean validate(String[][] inputObject) throws Exception {
 
@@ -107,6 +108,11 @@ public class BattleGame implements Game<String[][]> {
 		return true;
 	}
 
+	/**
+	 * @param players
+	 * Comment : Till we satisfy continue battle condition all players 
+	 * 			 continue firing on enemy players sequentially.
+	 */
 	@Override
 	public void startGame(Player[] players) {
 		while (continueGame(players)) {
@@ -117,6 +123,12 @@ public class BattleGame implements Game<String[][]> {
 		}		
 	}
 
+	/**
+	 * @param players
+	 * @return
+	 * Comment : Continue battle until we have any enemy who is out of his
+	 *           missile arsenal and battle strength i.e. battheship remains.
+	 */
 	@Override
 	public boolean continueGame(Player[] players) {
 		for (Player player : players) {
@@ -144,22 +156,44 @@ public class BattleGame implements Game<String[][]> {
 				.toArray(String[][]::new);
 	}
 	
-	public void setUpPlayer(Player[] players) throws Exception {
-		for (int cnt = 0; cnt < players.length; cnt++) {
+	/**
+	 * @return
+	 * @throws Exception
+	 * Comment : Setup Battle game players
+	 */
+	public Player[] setUpPlayer() throws Exception {
+		Player[] players = new BattleGamePlayer[TOTAL_PLAYERS];
+		for(int cnt = 0; cnt < TOTAL_PLAYERS; cnt++){
+			players[cnt] = new BattleGamePlayer(cnt + 1, BATTLEGROUNG_ROW_NUM, BATTLEGROUNG_COL_NUM); 
+		}
+		for (int cnt = 0; cnt < TOTAL_PLAYERS; cnt++) {
 			setUpTarget((BattleGamePlayer)players[cnt]);
 			setUpBattleField((BattleGamePlayer)players[cnt]);
 			setUpEnemyPlayer((BattleGamePlayer)players[cnt], players);
-		}		
+		}	
+		return players;
 	}
 	
+	/**
+	 * @param player
+	 */
 	public void setUpTarget(BattleGamePlayer player) {
 		player.setTargets(INPUT[INPUT.length - TOTAL_PLAYERS + player.getPlayerNum() - 1]);
 	}
 	
+	/**
+	 * @param player
+	 * @throws Exception
+	 */
 	public void setUpBattleField(BattleGamePlayer player) throws Exception {
 		player.setBattleField(INPUT, TOTAL_PLAYERS);
 	}
 	
+	/**
+	 * @param player
+	 * @param players
+	 * Comment : In case of multi-player game (>2) we set enemy in circular basis
+	 */
 	public void setUpEnemyPlayer(BattleGamePlayer player, Player[] players) {
 		if (player.getPlayerNum() == players.length) {
 			player.setEnemyPlayer((BattleGamePlayer)players[0]);
