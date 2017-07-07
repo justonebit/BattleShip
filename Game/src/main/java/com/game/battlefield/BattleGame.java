@@ -162,16 +162,23 @@ public class BattleGame implements Game<String[][]> {
 	 * Comment : Setup Battle game players
 	 */
 	public Player[] setUpPlayer() throws Exception {
-		Player[] players = new BattleGamePlayer[TOTAL_PLAYERS];
-		for(int cnt = 0; cnt < TOTAL_PLAYERS; cnt++){
-			players[cnt] = new BattleGamePlayer(cnt + 1, BATTLEGROUNG_ROW_NUM, BATTLEGROUNG_COL_NUM); 
+		Player[] player = {};
+		try {
+			Player[] players = new BattleGamePlayer[TOTAL_PLAYERS];
+			for (int cnt = 0; cnt < TOTAL_PLAYERS; cnt++) {
+				players[cnt] = new BattleGamePlayer(cnt + 1,
+						BATTLEGROUNG_ROW_NUM, BATTLEGROUNG_COL_NUM);
+			}
+			for (int cnt = 0; cnt < TOTAL_PLAYERS; cnt++) {
+				setUpTarget((BattleGamePlayer) players[cnt]);
+				setUpBattleField((BattleGamePlayer) players[cnt]);
+				setUpEnemyPlayer((BattleGamePlayer) players[cnt], players);
+			}
+			player = players;
+		} catch (Exception ex) {
+			System.out.println("Exception while setting up players, exiting...");	
 		}
-		for (int cnt = 0; cnt < TOTAL_PLAYERS; cnt++) {
-			setUpTarget((BattleGamePlayer)players[cnt]);
-			setUpBattleField((BattleGamePlayer)players[cnt]);
-			setUpEnemyPlayer((BattleGamePlayer)players[cnt], players);
-		}	
-		return players;
+		return player;
 	}
 	
 	/**
