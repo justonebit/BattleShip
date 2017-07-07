@@ -17,11 +17,11 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext appContext = SpringApplication.run(Application.class, args);
 		
-		Battle battle = new Battle();
+		Game battle = new BattleGame();
 		String[][] input = {};
-		BattlePlayer[] players = battle.configure(input);
+		Player[] players = battle.configure(input);
 		// System.out.println(Arrays.deepToString(players));
-		battle.startBattle(players);
+		battle.startGame(players);
 		// System.out.println(Arrays.deepToString(players));
 	}
 
