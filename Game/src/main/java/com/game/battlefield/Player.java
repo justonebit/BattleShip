@@ -10,6 +10,6 @@ package com.game.battlefield;
 public interface Player {
 
 	boolean perform();
-	boolean continueGame();
+	boolean defeated();
 	
 }
