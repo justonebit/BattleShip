@@ -117,7 +117,7 @@ public class BattleGame implements Game<String[][]> {
 	public void startGame(Player[] players) {
 		while (continueGame(players)) {
 			for (Player player : players) {
-				while (((BattleGamePlayer)player).perform())
+				while (player.perform())
 					;
 			}
 		}		
