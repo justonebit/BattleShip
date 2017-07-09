@@ -63,10 +63,10 @@ public class BattleGamePlayer implements Player {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.game.battlefield.Player#continueGame()
+	 * @see com.game.battlefield.Player#defeated()
 	 */
 	@Override
-	public boolean continueGame() {
+	public boolean defeated() {
 		return this.getMissiles() == 0 && this.getBattleStrength() == 0;
 	}
 	
