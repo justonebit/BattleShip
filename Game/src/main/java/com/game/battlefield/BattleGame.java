@@ -132,7 +132,7 @@ public class BattleGame implements Game<String[][]> {
 	@Override
 	public boolean continueGame(Player[] players) {
 		for (Player player : players) {
-			if (((BattleGamePlayer)player).getMissiles() == 0 && ((BattleGamePlayer)player).getBattleStrength() == 0) {
+			if (player.continueGame()) {
 				return false;
 			}
 		}
