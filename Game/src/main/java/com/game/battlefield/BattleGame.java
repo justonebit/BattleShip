@@ -28,7 +28,7 @@ public class BattleGame implements Game<String[][]> {
 		
 		Player[] players = {};
 		try {
-			if(inputObject.length == 0)
+			if(inputObject == null || inputObject.length == 0)
 				INPUT = createInputObjectFromFile(Paths.get(inputFile));
 			else
 				INPUT = inputObject;
