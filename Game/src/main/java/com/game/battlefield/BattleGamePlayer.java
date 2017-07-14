@@ -11,12 +11,12 @@ import java.util.Arrays;
  */
 public class BattleGamePlayer implements Player {
 
-	private int LOC_OFFSET = 3;
-	private int ROW_OFFSET = 2; //Row to read values for ship details
+	private static final int LOC_OFFSET = 3;
+	private static final int ROW_OFFSET = 2; //Row to read values for ship details
 	
-	private int playerNum = 0;
-	private int missiles = 0;
-	private int battleStrength = 0;
+	private int playerNum;
+	private int missiles;
+	private int battleStrength;
 	private int[][] battleField;
 	private String[] targets;
 	private BattleGamePlayer enemyPlayer;
@@ -223,11 +223,11 @@ public class BattleGamePlayer implements Player {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer str = new StringBuffer();
+		StringBuffer str = new StringBuffer(100);
 		str.append("Player [playerNum=" + playerNum + ", missiles=" + missiles
 				+ ", targets=" + Arrays.deepToString(targets) + ", battleField=\n") ;
 		for(int[] field: battleField) 
-			str.append(Arrays.toString(field) +"\n");
+			str.append(Arrays.toString(field)).append("\n");
 		return str.toString();
 	}
 
